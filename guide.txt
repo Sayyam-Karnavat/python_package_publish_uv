@@ -1,0 +1,51 @@
+
+
+1. Initialize the entire project structure using uv command
+    - uv init --package "PACKAGE_NAME"
+
+
+
+2. Go to the directory "PACKAGE_NAME" which is created using above command
+ - cd "PACKAGE_NAME"
+
+
+3. Inside the "src/PACKAGE_NAME" folder we can create our python package function and import into "__init__.py"
+
+ - For ex :- We have created calculator and server .py files.
+    Then we can add the functions inside our files into __init__.py file
+
+    Ex :-
+    from .calculator import add , sub, mul , div
+    from .server import create_app
+
+    __all__ = ["add" , "sub" , "mul" , "div" ,"create_app"]
+
+
+
+
+# Note :- We can add required python libraries using uv add "library_name" and it will be automatically added in pyproject toml and virtual environment which was created by "uv init" command
+For ex. I have add "flask" package and when user installs our package then flask will be automatically installed
+
+
+
+4. In pyporject.toml file we can change version(if republishing or adding new features) and specify python version required etc and other stuff.
+
+
+5. Set the token created on pypi.org website using command
+    1. $Env:UV_PUBLISH_TOKEN="YOUR_TOKEN"        # Provide token in string in double quotes
+        - This command will temporarily store the token and as soon as powershell terminal is closed the env variabile will be removed
+        (For this tutorial I used this method and it works well)
+    
+    2. [Environment]::SetEnvironmentVariable("UV_PUBLISH_TOKEN", "YOUR_TOKEN", "User") # "User" is keyword and environment variable is persistent for logged user in windows only
+
+
+6. To build package of our project go inside your project directory where pyproject.toml file is located and hit the command 
+     - uv build --no-sources
+
+    
+7. Publish the package
+     - uv publish
+
+
+8. Test your package
+    - uv add or pip install your "PACKAGE" and invoke functions defined.
